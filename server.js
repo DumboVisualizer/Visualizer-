@@ -1,11 +1,11 @@
-var express = require("express");
-var exphbs = require("express-handlebars");
-var bodyParser = require("body-parser");
+const express = require("express");
+const exphbs = require("express-handlebars");
+const bodyParser = require("body-parser");
 
-var app = express();
-var PORT = process.env.PORT || 8080;
+const app = express();
+const PORT = process.env.PORT || 8080;
 
-var db = require("./models");
+const db = require("./models");
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
@@ -19,8 +19,8 @@ app.use("/jquery",express.static("./node_modules/jquery/dist"));
 
 require("./routes/api-routes.js")(app);
 
-db.sequelize.sync().then(function() {
-  app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
+db.sequelize.sync().then(() => {
+  app.listen(PORT, () => {
+    console.log(`App listening on PORT ${PORT}`);
   });
 });

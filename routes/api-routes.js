@@ -1,8 +1,8 @@
-var db = require("../models");
+const db = require("../models");
 
-module.exports = function(app) {
+module.exports = app => {
 
-  app.get("/", function(req, res) {
+  app.get("/", (req, res) => {
     res.render("index", null);
   });
 };
