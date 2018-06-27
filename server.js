@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(express.static("public"));
+app.use("/TestFiles", express.static("./TestFiles"));
 app.use("/materialize",express.static("./node_modules/materialize-css/dist"));
 app.use("/jquery",express.static("./node_modules/jquery/dist"));
 

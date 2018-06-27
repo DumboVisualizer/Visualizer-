@@ -1,19 +1,28 @@
-.todo-list {
-  margin: 0 auto;
-  margin-top: 75px;
+#fragment {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  z-index: -1;
 }
 
-input.new-item:focus {
-  outline: none;
+form {
+  width: 200px;
 }
 
-.list-group-item > button.delete,
-.list-group-item > button.complete {
-  float: right;
-  height: 25px;
-  margin-left: 5px;
+input {
+  color: white;
 }
 
-.edit {
-  width: 100%;
+@media (orientation: landscape){
+  #fragment {
+    width: 100%;
+  }
+}
+
+@media (orientation: portrait){
+  #fragment {
+    height: 100%;
+  }
 }
