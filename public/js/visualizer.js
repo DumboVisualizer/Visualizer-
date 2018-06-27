@@ -61,9 +61,9 @@ $(document).ready(() => {
 
     function copyAudioDataToTexture(gl, audioData, textureArray) {
         for (let i = 0; i < audioData.length; i++) {
-            textureArray[4 * i + 0] = audioData[i] * $("#visRed").val() // R
-            textureArray[4 * i + 1] = audioData[i] * $("#visGreen").val() // G
-            textureArray[4 * i + 2] = audioData[i] * $("#visBlue").val() // B
+            textureArray[4 * i + 0] = audioData[i] // R
+            textureArray[4 * i + 1] = audioData[i] // G
+            textureArray[4 * i + 2] = audioData[i] // B
             textureArray[4 * i + 3] = 255 // A
         }
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, audioData.length, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, textureArray)
@@ -95,12 +95,12 @@ $(document).ready(() => {
     gl.uniform1f(fragUserInput1, $("unknown_5").val())
     const fragUserInput6 = gl.getUniformLocation(fragShader, 'userInput_6')
     gl.uniform1f(fragUserInput1, $("unknown_6").val())
-    const fragUserInput7 = gl.getUniformLocation(fragShader, 'userInput_7')
-    gl.uniform1f(fragUserInput1, $("unknown_7").val())
-    const fragUserInput8 = gl.getUniformLocation(fragShader, 'userInput_8')
-    gl.uniform1f(fragUserInput1, $("unknown_8").val())
-    const fragUserInput9 = gl.getUniformLocation(fragShader, 'userInput_9')
-    gl.uniform1f(fragUserInput1, $("unknown_9").val())
+    // const fragUserInput7 = gl.getUniformLocation(fragShader, 'userInput_7')
+    // gl.uniform1f(fragUserInput1, $("unknown_7").val())
+    // const fragUserInput8 = gl.getUniformLocation(fragShader, 'userInput_8')
+    // gl.uniform1f(fragUserInput1, $("unknown_8").val())
+    // const fragUserInput9 = gl.getUniformLocation(fragShader, 'userInput_9')
+    // gl.uniform1f(fragUserInput1, $("unknown_9").val())
     const fragSpectrumArray = new Uint8Array(4 * spectrum.length)
     const fragSpectrum = createTexture(gl)
 
@@ -116,9 +116,9 @@ $(document).ready(() => {
         gl.uniform1f(fragUserInput4, $("#unknown_4").val())
         gl.uniform1f(fragUserInput5, $("#unknown_5").val())
         gl.uniform1f(fragUserInput6, $("#unknown_6").val())
-        gl.uniform1f(fragUserInput7, $("#unknown_7").val())
-        gl.uniform1f(fragUserInput8, $("#unknown_8").val())
-        gl.uniform1f(fragUserInput9, $("#unknown_9").val())
+        // gl.uniform1f(fragUserInput7, $("#unknown_7").val())
+        // gl.uniform1f(fragUserInput8, $("#unknown_8").val())
+        // gl.uniform1f(fragUserInput9, $("#unknown_9").val())
         copyAudioDataToTexture(gl, spectrum, fragSpectrumArray)
         renderQuad(gl)
     })()

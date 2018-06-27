@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 
 app.use(express.static("public"));
 app.use("/TestFiles", express.static("./TestFiles"));
-app.use("/materialize",express.static("./node_modules/materialize-css/dist"));
+app.use("/bootstrap",express.static("./node_modules/bootstrap/dist"));
 app.use("/jquery",express.static("./node_modules/jquery/dist"));
 
 require("./routes/api-routes.js")(app);
