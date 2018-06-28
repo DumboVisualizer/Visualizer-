@@ -9,10 +9,11 @@ void main(void) {
 var fragmentShader = 
 `
 precision mediump float;
-
 uniform float time;
 uniform vec2 resolution;
 uniform sampler2D spectrum;
+uniform float loudness;
+
 uniform float userInput_1;
 uniform float userInput_2;
 uniform float userInput_3;
@@ -30,9 +31,9 @@ void main(void) {
   for (int i = 0; i < 3; i++) {
     z += 0.07;
     uv += p / l * (sin(z) + userInput_1) * abs(sin(l * userInput_2 - z * userInput_3));
-    c[i] = 0.01 / length(abs(mod(uv, userInput_4) - userInput_5) * time);
+    c[i] = 0.01 / length(abs(mod(uv, userInput_4) - userInput_5));
   }
-  float intensity = texture2D(spectrum, vec2(l, userInput_6)).x;
+  float intensity = texture2D(spectrum, vec2(l, userInput_6)).x * (loudness * 0.01);
   gl_FragColor = vec4(c / l * intensity, time);
 }
 `
