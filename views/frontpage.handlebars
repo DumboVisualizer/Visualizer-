@@ -3,7 +3,7 @@
 <canvas id="fragment" width="2000" height="2000"></canvas>
 
 <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" id="logo" href="#">Dumbo Visualizer</a>
+    <a class="navbar-brand" id="logo" href="#">Dumbo</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
         aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link disabled" id="login" href="login.html">Login</a>
+                <a class="nav-link disabled" id="login" href="/login">Login</a>
             </li>
         </ul>
     </div>
@@ -20,18 +20,20 @@
     <div class="container">
         <div class="row">
             <div id="sound-mangement" class="col-md-4">
-                <button type="file" class="btn btn-upload fas fa-upload "></button>
-                <button type="button" class="btn btn-spotify fab fa-spotify"></button>
-                <button type="button" class="btn btn-volume fas fa-volume-up"></button>
+                <label id="glow-upload" type="file" class="btn btn-default fas fa-upload glow-button">
+                    <input type="file" hidden>
+                    </label>
+                <button id="glow-spotify"type="button" class="btn btn-spotify fab fa-spotify"></button>
+                <button id="glow-volume" type="button" class="btn btn-volume fas fa-volume-up"></button>
             </div>
             <div id="sound-control" class="col-md-4">
-                <button type="button" class="btn btn-playlist fas fa-bars"></button>
-                <button type="button" class="btn btn-play fas fa-play"></button>
-                <button type="button" class="btn btn-pause fas fa-pause"></button>
+                <button id="glow-playlist" type="button" class="btn btn-playlist fas fa-bars"></button>
+                <button id="glow-play" type="button" class="btn btn-play fas fa-play"></button>
+                <button id="glow-pause" type="button" class="btn btn-pause fas fa-pause"></button>
             </div>
             <div id="visualizer-settings" class="col-md-4">
                 <div class="btn-group dropup">
-                    <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-settings fas fa-cog fa-static dropdown-toggle"></button>
+                    <button id="glow-settings" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-settings fas fa-cog fa-static dropdown-toggle"></button>
                     <div class="dropdown-menu">
                         <input class="dropup-placeholder1" type="number" id="unknown_1" name="unknown_1" placeholder="1.0" step="0.1" value="1.0"
                         />
@@ -57,4 +59,32 @@
 
 <script type="text/javascript" src="/js/visualizer.js"></script>
 
+<<<<<<< HEAD
 <script src="/js/view.js"></script>
+=======
+  uniform float userInput_1;
+  uniform float userInput_2;
+  uniform float userInput_3;
+  uniform float userInput_4;
+  uniform float userInput_5;
+  uniform float userInput_6;
+  
+  void main(void) {
+    vec3 c;
+    float z = 0.1 * time;
+    vec2 uv = gl_FragCoord.xy / resolution;
+    vec2 p = uv - 0.5;
+    p.x *= resolution.x / resolution.y;
+    float l = 0.2 * length(p);
+    for (int i = 0; i < 3; i++) {
+      z += 0.07;
+      uv += p / l * (sin(z) + userInput_1) * abs(sin(l * userInput_2 - z * userInput_3));
+      c[i] = 0.01 / length(abs(mod(uv, userInput_4) - userInput_5));
+    }
+    float intensity = texture2D(spectrum, vec2(l, userInput_6)).x;
+    gl_FragColor = vec4(c / l * intensity, time);
+  }
+</script>
+
+<script type="text/javascript" src="/js/visualizer.js"></script>
+>>>>>>> origin/master
