@@ -69,12 +69,27 @@ $(document).ready(() => {
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, audioData.length, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, textureArray)
     }
 
+    function getAudioLoudness() {
+        var array = new Uint8Array(analyser.fftSize);
+        analyser.getByteTimeDomainData(array);
+        var average = 0;
+        var max = 0;
+        for (var a of array) {
+            a = Math.abs(a - 128);
+            average += a;
+            max = Math.max(max, a);
+        }
+
+        average /= array.length;
+        return average;
+    }
+
     const fragCanvas = document.getElementById('fragment')
     fragCanvas.width = fragCanvas.parentNode.offsetWidth
     fragCanvas.height = fragCanvas.width
     const gl = fragCanvas.getContext('webgl') || fragCanvas.getContext('experimental-webgl')
-    const vertexShaderSrc = document.getElementById('vertex-shader').textContent
-    const fragmentShaderSrc = document.getElementById('fragment-shader').textContent
+    const vertexShaderSrc = vertexShader
+    const fragmentShaderSrc = fragmentShader
     const fragShader = createShader(gl, vertexShaderSrc, fragmentShaderSrc)
 
     const fragPosition = gl.getAttribLocation(fragShader, 'position')
@@ -101,6 +116,8 @@ $(document).ready(() => {
     // gl.uniform1f(fragUserInput1, $("unknown_8").val())
     // const fragUserInput9 = gl.getUniformLocation(fragShader, 'userInput_9')
     // gl.uniform1f(fragUserInput1, $("unknown_9").val())
+    const fragLoudness = gl.getUniformLocation(fragShader, 'loudness')
+    gl.uniform1f(fragLoudness, getAudioLoudness())
     const fragSpectrumArray = new Uint8Array(4 * spectrum.length)
     const fragSpectrum = createTexture(gl)
 
@@ -119,6 +136,7 @@ $(document).ready(() => {
         // gl.uniform1f(fragUserInput7, $("#unknown_7").val())
         // gl.uniform1f(fragUserInput8, $("#unknown_8").val())
         // gl.uniform1f(fragUserInput9, $("#unknown_9").val())
+        gl.uniform1f(fragLoudness, getAudioLoudness())
         copyAudioDataToTexture(gl, spectrum, fragSpectrumArray)
         renderQuad(gl)
     })()
