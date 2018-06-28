@@ -73,8 +73,8 @@ $(document).ready(() => {
     fragCanvas.width = fragCanvas.parentNode.offsetWidth
     fragCanvas.height = fragCanvas.width
     const gl = fragCanvas.getContext('webgl') || fragCanvas.getContext('experimental-webgl')
-    const vertexShaderSrc = document.getElementById('vertex-shader').textContent
-    const fragmentShaderSrc = document.getElementById('fragment-shader').textContent
+    const vertexShaderSrc = vertexShader
+    const fragmentShaderSrc = fragmentShader
     const fragShader = createShader(gl, vertexShaderSrc, fragmentShaderSrc)
 
     const fragPosition = gl.getAttribLocation(fragShader, 'position')
