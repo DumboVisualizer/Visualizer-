@@ -70,11 +70,11 @@ $(document).ready(() => {
     }
 
     function getAudioLoudness() {
-        var array = new Uint8Array(analyser.fftSize);
+        const array = new Uint8Array(analyser.fftSize);
         analyser.getByteTimeDomainData(array);
-        var average = 0;
-        var max = 0;
-        for (var a of array) {
+        let average = 0;
+        let max = 0;
+        for (let a of array) {
             a = Math.abs(a - 128);
             average += a;
             max = Math.max(max, a);

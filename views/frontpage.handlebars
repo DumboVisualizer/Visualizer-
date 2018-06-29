@@ -1,4 +1,5 @@
-<audio id="testAudio" src="/TestFiles/Hearts_on_Fire.ogg" autoplay controls></audio>
+<audio id="testAudio" src="/TestFiles/Hearts_on_Fire.ogg" autoplay controls loop hidden></audio>
+<button type="button" id="exitFullscreen" class="btn btn-fullscreen fas fa-expand"></button>
 
 <canvas id="fragment" width="2000" height="2000"></canvas>
 
@@ -19,19 +20,26 @@
 <footer id="superFooter" class="footer">
     <div class="container">
         <div class="row">
-            <div id="sound-mangement" class="col-md-4">
+            <div id="sound-mangement" class="col-sm-4">
                 <label id="glow-upload" type="file" class="btn btn-default fas fa-upload glow-button">
-                    <input type="file" hidden>
-                    </label>
-                <button id="glow-spotify"type="button" class="btn btn-spotify fab fa-spotify"></button>
-                <button id="glow-volume" type="button" class="btn btn-volume fas fa-volume-up"></button>
+                    <input type="file" hidden/>
+                </label>
+                <button id="glow-spotify" type="button" class="btn btn-spotify fab fa-spotify"></button>
+                <div class="btn-group dropup">
+                    <button id="glow-volume" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-volume fas fa-volume-up"></button>
+                    <div class="dropdown-menu">
+                        <div class="slidecontainer">
+                            <input type="range" min="0.0" max="100.0" value="100.0" class="slider" id="audioVolumeSlider">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="sound-control" class="col-md-4">
+            <div id="sound-control" class="col-sm-4">
                 <button id="glow-playlist" type="button" class="btn btn-playlist fas fa-bars"></button>
                 <button id="glow-play" type="button" class="btn btn-play fas fa-play"></button>
                 <button id="glow-pause" type="button" class="btn btn-pause fas fa-pause"></button>
             </div>
-            <div id="visualizer-settings" class="col-md-4">
+            <div id="visualizer-settings" class="col-sm-4">
                 <div class="btn-group dropup">
                     <button id="glow-settings" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-settings fas fa-cog fa-static dropdown-toggle"></button>
                     <div class="dropdown-menu">
