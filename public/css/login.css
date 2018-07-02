@@ -1,7 +1,25 @@
+
 .bg {
-    background: url('/images/darkgreybg.jpeg') no-repeat;
+    background: url('/images/darkgreybg.jpeg') 
+    no-repeat;
     width:100%;
     height:100vh;
+}
+
+.form-container {
+    border: 1px solid linear-gradient(-90deg, #355c7d, #6c5b7b, #c06c84);
+    padding: 50px 60px; 
+    margin-top:8vh;
+    -webkit-box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.39);
+    -moz-box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.39);
+    box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.39);
+}
+
+
+h1 {
+    text-align: center;
+    background-color:transparent;
+    color:white;
 }
 
 #username_color {
@@ -13,12 +31,12 @@
 }
 
 #dumbo_icon {
-  width:20%;
+  width:15%;
   display:block;
   position:absolute;
   left:0;
   right:0;
-  bottom:10%;
+  bottom:1%;
   margin:auto;
 }
 

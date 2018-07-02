@@ -165,11 +165,10 @@ nav {
   margin:auto;
 }
 
-.btnset1 {
+.btnupload {
   max-width: 100%;
+  top:50%;
 }
 
-.btnset2 {
-  max-width: 25em;
-}
+
 
