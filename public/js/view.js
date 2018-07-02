@@ -52,6 +52,5 @@ $(document).ready(() => {
             });
             isFullscreen = false;
         }
-
     });
 });
