@@ -1,15 +1,18 @@
 module.exports = function(sequelize, DataTypes) {
     var Account = sequelize.define("Account", {
-        text: {
-            type:DataTypes.STRING(140),
+        username: {
+            type:DataTypes.STRING(50),
             allowNull: false,
             validate: {
                 len:[1,50]
             }
         },
-        complete: {
-            type:DataTypes.BOOLEAN,
-            defaultValue: false
+        password: {
+            type:DataTypes.STRING(200),
+            allowNull: false,
+            validate: {
+                len:[1,200]
+            }
         }
     });
     return Account;
