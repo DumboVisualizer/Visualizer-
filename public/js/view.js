@@ -6,8 +6,8 @@ $(document).ready(() => {
         document.getElementById("testAudio").volume = this.value / 100;
     }
 
+   
 
-    
     $(".btn-play").on("click", () => {
         document.getElementById("testAudio").play();
     });
