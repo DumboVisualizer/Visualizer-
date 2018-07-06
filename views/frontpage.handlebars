@@ -1,0 +1,72 @@
+<audio id="testAudio" src="/TestFiles/Hearts_on_Fire.ogg" autoplay controls loop hidden></audio>
+<button type="button" id="exitFullscreen" class="btn btn-fullscreen fas fa-expand"></button>
+
+<canvas id="fragment" width="2000" height="2000"></canvas>
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" id="logo" href="#">DUMBO</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link disabled" id="login" href="/login">Login</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<footer id="superFooter" class="footer">
+    <div class="container">
+        <div class="row">
+            <div id="sound-mangement" class="col-sm-4">
+                <label id="glow-upload" type="file" class="btn btn-default fas fa-upload glow-button btnupload">
+                    <input type="file" hidden/>
+                </label>
+                <button id="glow-spotify" type="button" class="btn btn-spotify fab fa-spotify"></button>
+                <div class="btn-group dropup">
+                    <button id="glow-volume" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-volume fas fa-volume-up"></button>
+                    <div class="dropdown-menu">
+                        <div class="slidecontainer">
+                            <input type="range" min="0.0" max="100.0" value="100.0" class="slider" id="audioVolumeSlider">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="sound-control" class="col-sm-4">
+                <button id="glow-playlist" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-playlist fas fa-bars"></button>
+                <button id="glow-play" type="button" class="btn btn-play fas fa-play"></button>
+                <button id="glow-pause" type="button" class="btn btn-pause fas fa-pause"></button>
+            </div>
+            <div id="visualizer-settings" class="col-sm-4">
+                <div class="btn-group dropup">
+                    <button id="glow-settings" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-settings fas fa-cog fa-static dropdown-toggle"></button>
+                    <div class="dropdown-menu">
+                        <input class="dropup-placeholder1" type="number" id="unknown_1" name="unknown_1" placeholder="1.0" step="0.1" value="1.0"
+                        />
+                        <input class="dropup-placeholder2" type="number" id="unknown_2" name="unknown_2" placeholder="9.0" step="0.1" value="9.0"
+                        />
+                        <input class="dropup-placeholder3" type="number" id="unknown_3" name="unknown_3" placeholder="2.0" step="0.1" value="2.0"
+                        />
+                        <input class="dropup-placeholder4" type="number" id="unknown_4" name="unknown_4" placeholder="1.0" step="0.1" value="1.0"
+                        />
+                        <input class="dropup-placeholder5" type="number" id="unknown_5" name="unknown_5" placeholder="0.5" step="0.1" value="0.5"
+                        />
+                        <input class="dropup-placeholder6" type="number" id="unknown_6" name="unknown_6" placeholder="0.5" step="0.1" value="0.5"
+                        />
+                        <input class="dropup-placeholder6" type="number" id="unknown_7" name="unknown_7" placeholder="0.01" step="0.01" value="0.01"
+                        />
+                    </div>
+                </div>
+                <button type="button" class="btn btn-fullscreen fas fa-expand"></button>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript" src="/js/shaders.js"></script>
+
+<script type="text/javascript" src="/js/visualizer.js"></script>
+
+<script src="/js/view.js"></script>

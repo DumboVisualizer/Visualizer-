@@ -1,0 +1,78 @@
+{{data}}
+
+<audio id="testAudio" src="/TestFiles/Hearts_on_Fire.ogg" autoplay controls></audio>
+
+<canvas id="fragment" width="2000" height="2000"></canvas>
+
+<form action="input">
+  <input type="number" id="unknown_1" name="unknown_1"
+          placeholder="1.0" step="0.1" value="1.0"/>
+  <input type="number" id="unknown_2" name="unknown_2"
+          placeholder="9.0" step="0.1" value="9.0" />
+  <input type="number" id="unknown_3" name="unknown_3"
+          placeholder="2.0" step="0.1" value="2.0" />
+  <input type="number" id="unknown_4" name="unknown_4"
+          placeholder="1.0" step="0.1" value="1.0" />
+  <input type="number" id="unknown_5" name="unknown_5"
+          placeholder="0.5" step="0.1" value="0.5" />
+  <input type="number" id="unknown_6" name="unknown_6"
+          placeholder="0.5" step="0.1" value="0.5" />
+  <input type="number" id="unknown_7" name="unknown_7"
+          placeholder="0.1" step="0.1" value="0.1" />
+  <input type="number" id="unknown_8" name="unknown_8"
+          placeholder="0.5" step="0.1" value="0.5" />
+  <input type="number" id="unknown_9" name="unknown_9"
+          placeholder="0.2" step="0.01" value="0.2" />
+  <h4>Colors</h4>
+  <input type="number" id="visRed" name="visRed"
+          placeholder="1.0" step="0.1" value="1.0" />
+  <input type="number" id="visGreen" name="visGreen"
+          placeholder="1.0" step="0.1" value="1.0" />
+  <input type="number" id="visBlue" name="visBlue"
+          placeholder="1.0" step="0.1" value="1.0" />
+</form>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+  attribute vec2 position;
+
+  void main(void) {
+      gl_Position = vec4(position, 0, 1);
+  }
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+  precision mediump float;
+
+  uniform float time;
+  uniform vec2 resolution;
+  uniform sampler2D spectrum;
+
+  uniform float userInput_1;
+  uniform float userInput_2;
+  uniform float userInput_3;
+  uniform float userInput_4;
+  uniform float userInput_5;
+  uniform float userInput_6;
+
+  uniform float userInput_7;
+  uniform float userInput_8;
+  uniform float userInput_9;
+  
+  void main(void) {
+    vec3 c;
+    float z = userInput_7 * time;
+    vec2 uv = gl_FragCoord.xy / resolution;
+    vec2 p = uv - userInput_8;
+    p.x *= resolution.x / resolution.y;
+    float l = userInput_9 * length(p);
+    for (int i = 0; i < 3; i++) {
+      z += 0.07;
+      uv += p / l * (sin(z) + userInput_1) * abs(sin(l * userInput_2 - z * userInput_3));
+      c[i] = 0.01 / length(abs(mod(uv, userInput_4) - userInput_5) * time);
+    }
+    float intensity = texture2D(spectrum, vec2(l, userInput_6)).x;
+    gl_FragColor = vec4(c / l * intensity, time);
+  }
+</script>
+
+<script type="text/javascript" src="/js/visualizer.js"></script>

@@ -1,115 +1,56 @@
-$(document).ready(function() {
-  var $newItemInput = $("input.new-item");
-  var $todoContainer = $(".todo-container");
-  $(document).on("click", "button.delete", deleteTodo);
-  $(document).on("click", "button.complete", toggleComplete);
-  $(document).on("click", ".todo-item", editTodo);
-  $(document).on("keyup", ".todo-item", finishEdit);
-  $(document).on("blur", ".todo-item", cancelEdit);
-  $(document).on("submit", "#todo-form", insertTodo);
+$(document).ready(() => {
+    let isFullscreen = false;
 
-  var todos = [];
-
-  getTodos();
-
-  function initializeRows() {
-    $todoContainer.empty();
-    var rowsToAdd = [];
-    for (var i = 0; i < todos.length; i++) {
-      rowsToAdd.push(createNewRow(todos[i]));
+    const slider = document.getElementById("audioVolumeSlider");
+    slider.oninput = function () {
+        document.getElementById("testAudio").volume = this.value / 100;
     }
-    $todoContainer.prepend(rowsToAdd);
-  }
 
-  function getTodos() {
-    $.get("/api/todos", function(data) {
-      todos = data;
-      initializeRows();
+   
+
+    $(".btn-play").on("click", () => {
+        document.getElementById("testAudio").play();
     });
-  }
+    $(".btn-pause").on("click", () => {
+        document.getElementById("testAudio").pause();
+    });
+    $("#glow-upload > input").on("change", (event) => {
+        const input = event.target;
 
-  function deleteTodo(event) {
-    event.stopPropagation();
-    var id = $(this).data("id");
-    $.ajax({
-      method: "DELETE",
-      url: "/api/todos/" + id
-    }).then(getTodos);
-  }
-
-  function editTodo() {
-    var currentTodo = $(this).data("todo");
-    $(this).children().hide();
-    $(this).children("input.edit").val(currentTodo.text);
-    $(this).children("input.edit").show();
-    $(this).children("input.edit").focus();
-  }
-
-  function toggleComplete(event) {
-    event.stopPropagation();
-    var todo = $(this).parent().data("todo");
-    todo.complete = !todo.complete;
-    updateTodo(todo);
-  }
-
-  function finishEdit(event) {
-    var updatedTodo = $(this).data("todo");
-    if (event.which === 13) {
-      updatedTodo.text = $(this).children("input").val().trim();
-      $(this).blur();
-      updateTodo(updatedTodo);
-    }
-  }
-
-  function updateTodo(todo) {
-    $.ajax({
-      method: "PUT",
-      url: "/api/todos",
-      data: todo
-    }).then(getTodos);
-  }
-
-  function cancelEdit() {
-    var currentTodo = $(this).data("todo");
-    if (currentTodo) {
-      $(this).children().hide();
-      $(this).children("input.edit").val(currentTodo.text);
-      $(this).children("span").show();
-      $(this).children("button").show();
-    }
-  }
-
-  function createNewRow(todo) {
-    var $newInputRow = $(
-      [
-        "<li class='list-group-item todo-item'>",
-        "<span>",
-        todo.text,
-        "</span>",
-        "<input type='text' class='edit' style='display: none;'>",
-        "<button class='delete btn btn-danger'>x</button>",
-        "<button class='complete btn btn-primary'>✓</button>",
-        "</li>"
-      ].join("")
-    );
-
-    $newInputRow.find("button.delete").data("id", todo.id);
-    $newInputRow.find("input.edit").css("display", "none");
-    $newInputRow.data("todo", todo);
-    if (todo.complete) {
-      $newInputRow.find("span").css("text-decoration", "line-through");
-    }
-    return $newInputRow;
-  }
-
-  function insertTodo(event) {
-    event.preventDefault();
-    var todo = {
-      text: $newItemInput.val().trim(),
-      complete: false
-    };
-
-    $.post("/api/todos", todo, getTodos);
-    $newItemInput.val("");
-  }
+        const reader = new FileReader();
+        reader.onload = () => {
+            const dataURL = reader.result;
+            const output = document.getElementById('testAudio');
+            output.crossOrigin = "anonymous";
+            output.src = dataURL;
+        };
+        reader.readAsDataURL(input.files[0]);
+    });
+    $(".btn-fullscreen").on("click", () => {
+        if (!isFullscreen) {
+            $("nav").animate({
+                bottom: `${$(this).height()}px`
+            });
+            $(".footer").animate({
+                bottom: `-${$(this).height()}px`
+            });
+            $("#exitFullscreen").animate({
+                opacity: 1.0,
+                display: "block"
+            });
+            isFullscreen = true;
+        } else {
+            $("nav").animate({
+                bottom: "0px"
+            });
+            $(".footer").animate({
+                bottom: "0px"
+            });
+            $("#exitFullscreen").animate({
+                opacity: 0.0,
+                display: "none"
+            });
+            isFullscreen = false;
+        }
+    });
 });
